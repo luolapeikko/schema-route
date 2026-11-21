@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/schema-route",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utility to help building client and backend routes",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -27,7 +27,15 @@
     "lint": "biome check",
     "validate": "tsc --noEmit"
   },
-  "keywords": ["schema", "route", "typescript", "api", "client", "backend", "validation"],
+  "keywords": [
+    "schema",
+    "route",
+    "typescript",
+    "api",
+    "client",
+    "backend",
+    "validation"
+  ],
   "repository": "github:luolapeikko/schema-route",
   "author": "luolapeikko",
   "license": "MIT",
