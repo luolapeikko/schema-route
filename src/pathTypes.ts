@@ -1,5 +1,5 @@
 import type {StandardSchemaV1} from '@standard-schema/spec';
-import type {StandardInputInfer, StandardMiddlewareObject} from './types.js';
+import type {InferStandard, StandardInputInfer, StandardMiddlewareObject} from './types.js';
 
 interface ParamsDictionary {
 	[key: string | number]: string;
@@ -14,4 +14,4 @@ export type ReplaceParams<S extends string> = S extends `${infer Start}:${string
 		? `${Start}${string}`
 		: S;
 
-export type BuildPathType<T extends StandardMiddlewareObject, R extends string> = (params: StandardParamsInfer<T>) => ReplaceParams<R>;
+export type BuildPathType<T extends StandardMiddlewareObject, R extends string> = (params: StandardParamsInfer<T>) => ReplaceParams<R>

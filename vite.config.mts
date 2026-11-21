@@ -1,5 +1,3 @@
-/// <reference types="vitest" />
-
 import {defineConfig} from 'vitest/config';
 
 export default defineConfig({
@@ -16,5 +14,9 @@ export default defineConfig({
 			tsconfig: './tsconfig.test.json',
 			include: ['test/**/*.test-d.ts'],
 		},
+		env: {
+			HTTP_PORT: '5986',
+		},
+		fileParallelism: false,
 	},
 });

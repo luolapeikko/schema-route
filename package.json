@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "lint": "biome check",
     "validate": "tsc --noEmit"
   },
@@ -14,6 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^2.6.8",
+    "@luolapeikko/express-standard-schema": "^0.0.14",
     "@standard-schema/spec": "^1.1.0",
     "@tsconfig/node24": "^24.0.6",
     "@types/express": "^5.0.6",

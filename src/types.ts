@@ -1,5 +1,5 @@
 import type {StandardSchemaV1} from '@standard-schema/spec';
-import type {BuildPathType} from './pathTypes.js';
+import type {BuildPathType, ReplaceParams} from './pathTypes.js';
 import type {RouterPathType} from './routerTypes.js';
 
 export type StandardInputInfer<T> = T extends StandardSchemaV1<infer U, infer _> ? U : never;
@@ -55,5 +55,5 @@ export type SchemaRoute<T extends StandardMiddlewareObject, Out extends Standard
 	 */
 	buildPath: BuildPathType<T, R>;
 	method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-	response?: Out;
+	response: Out;
 };

@@ -6,7 +6,13 @@ export function createSchemaRoute<
 	T extends StandardMiddlewareObject,
 	Out extends StandardSchemaV1<any, any> | undefined,
 	R extends RequireAllParams<StandardParamsInfer<T>>,
->(reqHandler: T, router: R, buildPath: BuildPathType<T, R>, response: Out, method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'): SchemaRoute<T, Out, R> {
+>(
+	reqHandler: T,
+	router: R,
+	buildPath: BuildPathType<T, R>,
+	response: Out,
+	method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+): SchemaRoute<T, Out, R> {
 	return {
 		...reqHandler,
 		buildPath,
