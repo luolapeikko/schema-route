@@ -1,5 +1,13 @@
 # @luolapeikko/schema-route
 
+
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+[![npm version](https://badge.fury.io/js/@luolapeikko%2Fschema-route.svg)](https://badge.fury.io/js/@luolapeikko%2Fschema-route)
+[![Maintainability](https://qlty.sh/gh/luolapeikko/projects/schema-route/maintainability.svg)](https://qlty.sh/gh/luolapeikko/projects/schema-route)
+[![Code Coverage](https://qlty.sh/gh/luolapeikko/projects/schema-route/coverage.svg)](https://qlty.sh/gh/luolapeikko/projects/schema-route)
+[![CI/CD](https://github.com/luolapeikko/schema-route/actions/workflows/main.yml/badge.svg)](https://github.com/luolapeikko/schema-route/actions/workflows/main.yml)
+
+
 A TypeScript library for creating HTTP API schema objects "contracts" that define the structure of requests and responses.
 
 This uses `@standard-schema/spec` for defining and validating the structure of request and response schemas. (example uses `zod` but any compatible schema library can be used)
