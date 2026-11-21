@@ -4,13 +4,12 @@ import type express from 'express';
 import type {RequestHandler} from 'express';
 import type {SchemaRoute, StandardMiddlewareObject, StandardOutputInfer} from '../../src/index.js';
 
-export function hookRouter<T extends StandardMiddlewareObject, Out extends StandardSchemaV1<any, any> | undefined, R extends string>(
+export function schemaRoute<T extends StandardMiddlewareObject, Out extends StandardSchemaV1<any, any> | undefined, R extends string>(
 	app: express.Application,
 	schema: SchemaRoute<T, Out, R>,
 	handler: RequestHandler<StandardParamsOutInfer<T>, StandardOutputInfer<Out>, StandardBodyOutInfer<T>, StandardQueryOutInfer<T>>,
 ): void {
-	const method = schema.method ?? 'GET';
-	switch (method) {
+	switch (schema.method) {
 		case 'GET':
 			app.get(schema.router, validateRequestHandler(schema, handler));
 			break;
@@ -27,6 +26,6 @@ export function hookRouter<T extends StandardMiddlewareObject, Out extends Stand
 			app.patch(schema.router, validateRequestHandler(schema, handler));
 			break;
 		default:
-			throw new Error(`Unsupported method: ${method}`);
+			throw new Error(`Unsupported method: ${schema.method satisfies never}`);
 	}
 }
