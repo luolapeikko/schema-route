@@ -1,6 +1,6 @@
 ---
 name: schema-route
-description: Use the @luolapeikko/schema-route package when building shared client and backend routes with strict schema validation.
+description: Use @luolapeikko/schema-route when defining shared, type-safe HTTP route contracts between TypeScript clients and backends. Covers Standard Schema validation types, request parameters, query parameters, response inference, and URL path construction.
 ---
 
 # Schema Route
@@ -8,6 +8,17 @@ description: Use the @luolapeikko/schema-route package when building shared clie
 ## Purpose
 
 The purpose of the `@luolapeikko/schema-route` package is to provide a unified way to define and validate routes for both client and backend applications. It ensures that route definitions are consistent and type-safe, reducing the risk of runtime errors and improving developer productivity.
+
+## Design rules
+
+- Define route contracts in shared modules rather than duplicating
+  endpoint definitions in client and backend projects.
+- Keep framework-specific implementations outside this package.
+- Do not duplicate request or response types manually when they
+  can be inferred from the route definition.
+- Use schema input types for values supplied by callers.
+- Use schema output types for values after validation/transformation.
+- Do not assume that defining a route performs HTTP validation.
 
 ## Important conventions
 
@@ -19,12 +30,15 @@ The purpose of the `@luolapeikko/schema-route` package is to provide a unified w
 - The response schema determines the inferred response output type. The `response` property is required on a route, though its value may be `undefined`.
 - Treat this package as a route-contract and typing library, not an HTTP client, server, or validation middleware. Keep framework-specific request handling in adapters and avoid adding framework dependencies to the core package.
 - buildPath does handle only the path parameters inferred from the `params` schema. Optional query parameters should be serialized separately using `createURLSearchParams` on client api setup.
+- On actual setup, there would be function to attach defined routes to the backend router as handlers (such as Express or Fastify) and on client side (like fetch) to make API calls based on the defined route contracts.
 
 ## Usage patterns
 
 ### GET routes
 
 This is GET route example with a path parameter `id` and returns an object with a `name` property.
+// Input: { params: { id: number } }
+// Output: { name: string}
 ```typescript
 createSchemaRoute(
   {params: z.object({id: z.string().transform(Number)})},
@@ -38,6 +52,8 @@ createSchemaRoute(
 ### POST routes
 
 This is a POST route example with a request body containing a `name` property and returns an object with a `name` property.
+// Input: { body: { name: string } }
+// Output: { name: string }
 ```typescript
 createSchemaRoute(
   {body: z.object({name: z.string()})},
@@ -52,6 +68,8 @@ createSchemaRoute(
 
 This is a GET route example with query parameters containing a `search` property and returns an object with a `results` property.
 On this actual api caller function need to use `const queryParams = createURLSearchParams(input.query);` to serialize the query parameters to actual URL.
+// Input: { query: { search: string } }
+// Output: { results: string[] }
 ```typescript
 createSchemaRoute(
   {query: z.object({search: z.string()})},
